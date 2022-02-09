@@ -407,3 +407,18 @@ RegisterNetEvent("qb-dispatch:atmrobbery", function()
     })
     TriggerServerEvent("qb-dispatch:atmrobbery", currentPos)
 end)
+
+RegisterNetEvent("qb-dispatch:civdown", function()
+    local playerPed = PlayerPedId()
+    local currentPos = GetEntityCoords(playerPed)
+    local gender = IsPedMale(playerPed)
+    TriggerServerEvent('dispatch:svNotify', {
+        dispatchCode = "10-60",
+        firstStreet = GetStreetAndZone(),
+        gender = gender,
+        priority = 2,
+        origin = {x = currentPos.x, y = currentPos.y, z = currentPos.z},
+        dispatchMessage = "Injured Person"
+    })
+    TriggerServerEvent("qb-dispatch:civdown", currentPos)
+end)
